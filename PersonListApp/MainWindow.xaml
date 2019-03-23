@@ -1,0 +1,54 @@
+﻿<Window x:Class="PersonListApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PersonListApp"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        mc:Ignorable="d"
+        Title="Persons" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid IsEnabled="{Binding IsControlEnabled, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="File">
+                <MenuItem Header="Save" Command="{Binding Save}"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Add">
+                <MenuItem Header="Add new person" Command="{Binding Add}"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Sort">
+                <MenuItem Header="Sort by first name" Command="{Binding SortFirstName}"></MenuItem>
+                <MenuItem Header="Sort by last name" Command="{Binding SortLastName}"></MenuItem>
+                <MenuItem Header="Sort by email" Command="{Binding SortEmail}"></MenuItem>
+                <MenuItem Header="Sort by birthday date" Command="{Binding SortBirthday}"></MenuItem>
+                <MenuItem Header="Sort by western zodiac" Command="{Binding SortWestern}"></MenuItem>
+                <MenuItem Header="Sort by chinese zodiac" Command="{Binding SortChinese}"></MenuItem>
+                <MenuItem Header="Sort by isAdult parameter" Command="{Binding SortIsAdult}"></MenuItem>
+                <MenuItem Header="Sort by isBirthday parameter" Command="{Binding SortIsBirthday}"></MenuItem>
+            </MenuItem>
+            <MenuItem Header ="Edit">
+                <MenuItem Header ="Edit selected person" Command="{Binding Edit}"></MenuItem>
+            </MenuItem>
+            <MenuItem Header ="Delete">
+                <MenuItem Header ="Delete selected person" Command="{Binding Delete}"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Persons, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False" SelectedValue="{Binding SelectedPerson,UpdateSourceTrigger=PropertyChanged}" ScrollViewer.CanContentScroll="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="First name" Binding="{Binding FirstName, Mode=OneWay}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Last name" Binding="{Binding LastName, Mode=OneWay}"></DataGridTextColumn>
+                <DataGridTextColumn Header="E-mail" Binding="{Binding Email, Mode=OneWay}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Birthday" Binding="{Binding Date, Mode=OneWay, StringFormat=dd/MM/yyyy}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Western Zodiac" Binding="{Binding WesternZodiac, Mode=OneWay}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Chinese Zodiac" Binding="{Binding ChineseZodiac, Mode=OneWay}"></DataGridTextColumn>
+                <DataGridTextColumn Width="55" Header="Is Adult" Binding="{Binding IsAdult, Mode=OneWay}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Birthday Today" Binding="{Binding IsBirthday, Mode=OneWay}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <fa:ImageAwesome Grid.Row="2" Icon="Refresh" Margin ="20" Width="50" Height="50" Spin="True" Visibility="{Binding LoaderVisibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></fa:ImageAwesome>
+    </Grid>
+</Window>
